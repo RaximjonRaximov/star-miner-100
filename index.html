@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Star Miner: 100 Missions</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <img src="assets/banner.png" alt="Star Miner 100 Missions banner">
+      <div class="header-overlay">
+        <div class="header-title">
+          <h1>Star Miner</h1>
+          <p>100 Missions — Mine, upgrade, complete.</p>
+        </div>
+        <div class="header-stat">
+          <div class="label">Credits</div>
+          <div class="value" id="credit-display">0</div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel" id="left-panel">
+        <h2 class="panel-title">Cargo Hold</h2>
+        <div class="panel-scroll">
+          <div class="capacity-bar">
+            <div class="capacity-fill" id="capacity-fill"></div>
+          </div>
+          <div class="capacity-text" id="capacity-text">0 / 0</div>
+          <div id="resource-list"></div>
+          <button class="sell-all-btn" id="sell-all">Sell All Resources</button>
+        </div>
+      </section>
+
+      <section class="panel game-panel">
+        <div class="belt-bar" id="belt-bar"></div>
+        <canvas id="asteroid-canvas"></canvas>
+        <div class="hint">Click the asteroid to mine. Buy upgrades to progress through 100 missions.</div>
+      </section>
+
+      <section class="panel" id="right-panel">
+        <h2 class="panel-title">Upgrades</h2>
+        <div class="panel-scroll">
+          <div id="upgrade-list"></div>
+        </div>
+        <h2 class="panel-title">Missions <span class="muted" id="mission-completed">0 / 100</span></h2>
+        <div class="panel-scroll">
+          <div id="mission-list"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer style="padding: 8px 12px; text-align: right; border-top: 1px solid var(--border); font-size: 0.7rem; color: var(--muted);">
+      <button id="save-btn" style="background: transparent; border: 1px solid var(--border); color: var(--text); border-radius: 4px; padding: 4px 8px; cursor: pointer; margin-right: 8px;">Save</button>
+      <button id="reset-btn" style="background: transparent; border: 1px solid var(--border); color: var(--text); border-radius: 4px; padding: 4px 8px; cursor: pointer;">Reset</button>
+    </footer>
+  </div>
+
+  <div id="toast-area"></div>
+  <script src="js/missions.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
