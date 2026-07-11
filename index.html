@@ -10,58 +10,86 @@
 <body>
   <div id="app">
     <header>
-      <img src="assets/banner.png" alt="Star Miner 100 Missions banner">
-      <div class="header-overlay">
-        <div class="header-title">
-          <h1>Star Miner</h1>
-          <p>100 Missions — Mine, upgrade, complete.</p>
+      <img class="header-bg" src="assets/banner.png" alt="Star Miner 100 Missions banner">
+      <div class="header-glass">
+        <div class="brand">
+          <img src="assets/favicon.png" alt="Star Miner" class="logo">
+          <div class="brand-text">
+            <h1>Star Miner</h1>
+            <span class="tagline">100 Missions</span>
+          </div>
         </div>
-        <div class="header-stat">
-          <div class="label">Credits</div>
-          <div class="value" id="credit-display">0</div>
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-label">Credits</span>
+            <span class="stat-value" id="credit-display">0</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Missions</span>
+            <span class="stat-value" id="mission-completed">0 / 100</span>
+          </div>
+        </div>
+        <div class="controls">
+          <button id="save-btn" class="btn-small">Save</button>
+          <button id="reset-btn" class="btn-small">Reset</button>
         </div>
       </div>
     </header>
 
     <main>
-      <section class="panel" id="left-panel">
-        <h2 class="panel-title">Cargo Hold</h2>
-        <div class="panel-scroll">
-          <div class="capacity-bar">
-            <div class="capacity-fill" id="capacity-fill"></div>
-          </div>
-          <div class="capacity-text" id="capacity-text">0 / 0</div>
-          <div id="resource-list"></div>
-          <button class="sell-all-btn" id="sell-all">Sell All Resources</button>
-        </div>
-      </section>
-
-      <section class="panel game-panel">
+      <section class="viewport">
         <div class="belt-bar" id="belt-bar"></div>
-        <canvas id="asteroid-canvas"></canvas>
-        <div class="hint">Click the asteroid to mine. Buy upgrades to progress through 100 missions.</div>
+        <div class="canvas-wrap">
+          <canvas id="asteroid-canvas"></canvas>
+          <div class="hint">Click the asteroid to mine. Switch belts to target different ores.</div>
+        </div>
       </section>
 
-      <section class="panel" id="right-panel">
-        <h2 class="panel-title">Upgrades</h2>
-        <div class="panel-scroll">
-          <div id="upgrade-list"></div>
-        </div>
-        <h2 class="panel-title">Missions <span class="muted" id="mission-completed">0 / 100</span></h2>
-        <div class="panel-scroll">
-          <div id="mission-list"></div>
+      <section class="deck">
+        <nav class="deck-tabs">
+          <button class="tab active" data-tab="cargo">Cargo</button>
+          <button class="tab" data-tab="upgrades">Upgrades</button>
+          <button class="tab" data-tab="missions">Missions</button>
+        </nav>
+        <div class="deck-content">
+          <div class="tab-panel active" id="panel-cargo">
+            <div class="capacity">
+              <div class="capacity-header">
+                <span class="capacity-label">Cargo Hold</span>
+                <span id="capacity-text">0 / 0</span>
+              </div>
+              <div class="capacity-bar">
+                <div class="capacity-fill" id="capacity-fill"></div>
+              </div>
+            </div>
+            <div class="resource-list" id="resource-list"></div>
+            <button class="sell-all-btn" id="sell-all">Sell All Resources</button>
+          </div>
+
+          <div class="tab-panel" id="panel-upgrades">
+            <div class="upgrade-list" id="upgrade-list"></div>
+          </div>
+
+          <div class="tab-panel" id="panel-missions">
+            <div class="mission-list" id="mission-list"></div>
+          </div>
         </div>
       </section>
     </main>
-
-    <footer style="padding: 8px 12px; text-align: right; border-top: 1px solid var(--border); font-size: 0.7rem; color: var(--muted);">
-      <button id="save-btn" style="background: transparent; border: 1px solid var(--border); color: var(--text); border-radius: 4px; padding: 4px 8px; cursor: pointer; margin-right: 8px;">Save</button>
-      <button id="reset-btn" style="background: transparent; border: 1px solid var(--border); color: var(--text); border-radius: 4px; padding: 4px 8px; cursor: pointer;">Reset</button>
-    </footer>
   </div>
 
   <div id="toast-area"></div>
   <script src="js/missions.js"></script>
   <script src="js/game.js"></script>
+  <script>
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
 </body>
 </html>
